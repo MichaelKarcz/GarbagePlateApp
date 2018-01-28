@@ -1,5 +1,5 @@
-let latitude = 0; //position.coords.latitude;
-let longitude = 0; //position.coords.longitude;
+let latitude = 43.155863; //position.coords.latitude;
+let longitude = -77.608505; //position.coords.longitude;
 var hots_locations = [[43.068655, -77.438415],
 		[43.094232, -77.796844],
 		[43.103257, -77.464507],
@@ -14,19 +14,18 @@ var hots_locations = [[43.068655, -77.438415],
 		[43.182229, -77.803624],
 		[43.083200, -77.639259]];
 var index;
+var start = new google.maps.LatLng(latitude, longitude);
+var end = start;
 var hots_labels = ["Perinton Hots", "Chili Hots", "Fairport Hots", "ER Hots", "Penfield Hots", "Marks Texas Hots", "Jefferson Hots", "Nick Tahou Hots", "Lake Hots", "Steve T Hots", "West Ridge Hots", "Spencerport Hots", "Henrietta Hots"];
 
 function geoFindMe() {
     var output = document.getElementById("out");
 
-
     if (!navigator.geolocation) {
         output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
     } else {
       getLocation();
-      //initMap();
       console.log(latitude + " " + longitude);
-      //'<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 	  document.getElementById('map').style.display = "block";
 	  document.getElementById('button').style.display = "none";
     }
@@ -34,8 +33,10 @@ function geoFindMe() {
   function success(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
+	start = new google.maps.LatLng(latitude, longitude);
 	var index = nearest();
-    console.log(latitude + " *** " + longitude);
+	end = new google.maps.LatLng(hots_locations[index][0], hots_locations[index][1]);
+	//end = new google.maps.LatLng(43.182229, -77.803624);
     initMap();
   }
 
@@ -52,44 +53,6 @@ function geoFindMe() {
   }
 }
 
-function initMap() {
-
-    var uluru = {
-        lat: latitude,
-        lng: longitude
-    };
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: uluru
-    });
-    var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-    });
-/*	
-	directionsService = new google.maps.DirectionsService;
-	directionsDisplay = new google.maps.DirectionsRenderer({
-		map:map
-	});
-
-		  markerA = new google.maps.Marker({
-				      position: uluru
-				      title: "Current Location",
-				      label: "A",
-				      map:map
-				    });
-
-		  markerB = new google.maps.Marker({
-				      position: hots_locations[index] = [0][1];
-				      title: "Desitination",
-				      label: "B",
-				      map:map
-				    });
-
-		  Direct(directionsService, directionsDisplay, uluru, hots_locations[index]);
-*/
-}
-
 function nearest() {
 	var temp = [];
 	hots_locations.forEach(function(loc) {
@@ -102,18 +65,108 @@ function nearest() {
 	console.log(temp.indexOf(min));
 	return temp.indexOf(min);
 }
-/*
-function Direct(directionsService, directionsDisplay,uluru,hots_locations[index]) {
-  directionsService.route({
-    origin: uluru,
-    destination: hots_locations[index],
-    travelMode: google.maps.TravelMode.DRIVING
-  }, fucntion(response, status) {
-    if(status == google.maps.DirectionsStatus.OK){
-      directionsDisplay.setDirections(response);
-    } 
-    else {
-      window.alert('Directions request failed due to' + status);
-    }
-  });
-}*/
+
+function initMap() {
+	var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), {
+       zoom: 10,
+       center: {lat:latitude, lng: longitude},
+		styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
+    });
+    directionsDisplay.setMap(map);
+
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+}
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+   directionsService.route({
+      origin: start,
+      destination: end,
+      travelMode: 'DRIVING'
+   }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+   });
+}
