@@ -1,22 +1,40 @@
 let latitude = 43.155863; //position.coords.latitude;
 let longitude = -77.608505; //position.coords.longitude;
-var hots_locations = [[43.068655, -77.438415],
-		[43.094232, -77.796844],
-		[43.103257, -77.464507],
-		[43.114536, -77.483390],
-		[43.130573, -77.478240],
-		[43.146857, -77.593597],
-		[43.147609, -77.628272],
-		[43.154622, -77.620376],
-		[43.174843, -77.629045],
-		[43.165203, -77.686723],
-		[43.202378, -77.642263],
-		[43.182229, -77.803624],
-		[43.083200, -77.639259]];
+var hots_locations = [[43.068057, -77.438674], // 0
+		[43.093555, -77.797576], // 1
+		[43.102459, -77.465241], // 2
+		[43.114087, -77.484099], // 3
+		[43.129964, -77.478287], // 4
+		[43.146561, -77.594072], // 5
+		[43.146986, -77.628801], // 6
+		[43.153882, -77.621239], // 7
+		[43.174666, -77.629222], // 8
+		[43.164968, -77.686938], // 9
+		[43.202162, -77.642374], // 10
+		[43.182082, -77.803658], // 11
+		[43.082645, -77.639859], // 12
+    [43.147791, -77.709796], // 13
+    [43.241260, -77.695929], // 14
+    [43.215278, -77.938466]]; // 15
 var index;
 var start = new google.maps.LatLng(latitude, longitude);
 var end = start;
-var hots_labels = ["Perinton Hots", "Chili Hots", "Fairport Hots", "ER Hots", "Penfield Hots", "Marks Texas Hots", "Jefferson Hots", "Nick Tahou Hots", "Lake Hots", "Steve T Hots", "West Ridge Hots", "Spencerport Hots", "Henrietta Hots"];
+var hots_labels = ["Perinton Hots", // 0
+                   "Chili Hots", // 1
+                   "Fairport Hots", // 2
+                   "ER Hots", // 3
+                   "Penfield Hots", // 4
+                   "Marks Texas Hots", // 5
+                   "Jefferson Hots", // 6
+                   "Nick Tahou Hots", // 7
+                   "Lake Hots", // 8
+                   "Steve T Hots", // 9
+                   "West Ridge Hots", // 10
+                   "Spencerport Hots", // 11
+                   "Henrietta Hots", // 12
+                   "Wimpy's Burger Basket (Gates)", // 13
+                   "Wimpy's Burger Basket (Greece)", // 14
+                   "Jimmy Z's Texas Hots"]; // 15
 
 function geoFindMe() {
     var output = document.getElementById("out");
