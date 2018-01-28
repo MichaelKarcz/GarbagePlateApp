@@ -2,50 +2,22 @@
 <html>
   <head>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-    <style type="text/css">
-    #map {
-      height: 100vh;
-      width: 100vw;
-    }
-	.hidden{
-	    display:none;
-	}
-	.unhidden{
-	    display:block;
-	}
-	#button {
-		border: 3px solid black;
-		margin: auto;
-		width:50%;
-		margin-top:200px;
-		padding:50px;
-		font-weight:bold;
-		font-family:'Open Sans Condensed', sans-serif;
-		font-size:40px;
-		background-color:#404040;
-		color:#DD4500;
-	}
-	body {
-		background-color:#E0E0E0;
-	}
-  </style>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
 		<div>
 			<div>
-  	<p><button class="unhidden" id="button" onclick="geoFindMe()">GET ME GARBAGE</button></p>
-	<div id="out"></div>
+  				<p><button class="unhidden" id="button" onclick="geoFindMe()">GET ME GARBAGE</button></p>
+				<div id="out"></div>
 			</div>
 			<div>
-        <div class="hidden" id="map"></div>
-				<!-- <img src="pic.png"> -->
+        		<div class="hidden" id="map"></div>
 			</div>
- 		</div> 
-        
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script async defer
+ 		</div>
+  <script type="text/javascript" src="./js/main.js"></script>
+  <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDK7Zem_0veW-CQ5iBrl_BNs-f2-OiivzE&callback=initMap">
-    </script>
+  </script>
   </body>
 </html>
       
